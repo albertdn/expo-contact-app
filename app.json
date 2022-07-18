@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "contact-apps-copy",
+    "slug": "contact-apps-copy",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
