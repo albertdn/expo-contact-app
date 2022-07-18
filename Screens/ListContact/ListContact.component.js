@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
-import { Fab, Icon } from 'native-base';
+import { Fab, AddIcon } from 'native-base';
 
 import axios from 'axios';
 
@@ -53,13 +53,13 @@ export default function ListContact({ navigation }) {
         renderItem={({item}) => renderViewItem(item, navigation)}
         keyExtractor={({item}, index) => index.toString()}
       />
-      <Fab
-        active="true"
-        style={{ backgroundColor: 'dodgerblue' }}
-        position="bottomRight"
-        onPress={()=> addContact(navigation)}>
-        <Icon name="add" />
-      </Fab>
+       <Fab 
+        renderInPortal={false}
+        shadow={2}
+        size="sm"
+        icon={<AddIcon size="5" mt="0.5" color="white" />}
+        onPress={()=> addContact(navigation)}
+      />
     </View>
   )
 }
