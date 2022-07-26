@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
 import { Fab, AddIcon } from 'native-base';
-
 import axios from 'axios';
 
 const getData = (setDataSource) => {
