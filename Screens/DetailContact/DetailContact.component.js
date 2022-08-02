@@ -18,7 +18,7 @@ const getData = (setContactData, navigation, route) => {
         id: response.data.data.id,
         firstName: response.data.data.firstName,
         lastName: response.data.data.lastName,
-        age: response.data.data.age,
+        age: response.data.data.age.toString(),
         photo: response.data.data.photo  
       });
     })
@@ -33,7 +33,9 @@ const handleDelete = (navigation, route) => {
     .then(() => {
       navigation.dispatch(CommonActions.reset({
         index: 0,
-        actions: { name: 'ListContact' },
+        routes: [
+          { name: 'ListContact' }
+        ]
       }));
     })
     .catch(function (error) {
@@ -43,7 +45,7 @@ const handleDelete = (navigation, route) => {
 }
 
 const navigateToUpdate= (contactData, navigation) => {
-  navigation.navigate('UpdateContact', { contactData })
+  navigation.navigate('UpdateContact', { contactDataParams: contactData })
 }
 
 export default function DetailContact({ navigation, route }) {

@@ -25,7 +25,9 @@ const handleSubmit = (contactData, navigation) => {
     .then(() => {
       navigation.dispatch(CommonActions.reset({
         index: 0,
-        actions: { name: 'ListContact' },
+        routes: [
+          { name: 'ListContact' }
+        ]
       }));
     })
     .catch(function (error) {
@@ -51,7 +53,7 @@ export default function PostContact({ navigation }) {
       />
       <TextInput 
         placeholder='Age'
-        keyboardType={"numeric"}
+        keyboardType="number-pad"
         onChangeText={(value) => setContactData(prevState => ({...prevState, age: value}))}
         style={styles.inputStyle}
       />
