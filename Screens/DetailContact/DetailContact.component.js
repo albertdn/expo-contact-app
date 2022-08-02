@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { Text, View, Image, Button } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
 import axios from 'axios';
@@ -11,8 +11,8 @@ const defaultContactData = {
   photo: 'N/A'
 };
 
-const getData = (setContactData, navigation) => {
-  axios.get('https://simple-contact-crud.herokuapp.com/contact/' + navigation.state.params.id)
+const getData = (setContactData, navigation, route) => {
+  axios.get('https://simple-contact-crud.herokuapp.com/contact/' + route.params.id)
     .then(response => {
       setContactData({
         id: response.data.data.id,
@@ -28,8 +28,8 @@ const getData = (setContactData, navigation) => {
     });
 }
 
-const handleDelete = (navigation) => {
-  axios.delete('https://simple-contact-crud.herokuapp.com/contact/' + navigation.state.params.id)
+const handleDelete = (navigation, route) => {
+  axios.delete('https://simple-contact-crud.herokuapp.com/contact/' + route.params.id)
     .then(() => {
       navigation.dispatch(CommonActions.reset({
         index: 0,
@@ -43,14 +43,14 @@ const handleDelete = (navigation) => {
 }
 
 const navigateToUpdate= (contactData, navigation) => {
-  navigation.navigate('UpdateContact', { ...contactData })
+  navigation.navigate('UpdateContact', { contactData })
 }
 
-export default function DetailContact({ navigation }) {
+export default function DetailContact({ navigation, route }) {
   const [contactData, setContactData] = useState(defaultContactData);
 
   useEffect(() => {
-    getData(setContactData, navigation);
+    getData(setContactData, navigation, route);
   }, [])
 
   return (
@@ -63,7 +63,7 @@ export default function DetailContact({ navigation }) {
         <Text style={{marginBottom:15, alignSelf: 'center'}}>{contactData.age} years old</Text>
         <Button title='Update Contact' onPress={()=> navigateToUpdate(contactData, navigation)}/>
         <View style={{margin: 10}}/>
-        <Button title='Delete Contact' onPress={()=> handleDelete()}/>
+        <Button title='Delete Contact' onPress={()=> handleDelete(navigation, route)}/>
       </View>
   )
 }
