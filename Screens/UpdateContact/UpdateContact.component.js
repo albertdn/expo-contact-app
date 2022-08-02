@@ -66,7 +66,7 @@ export default function UpdateContact({ navigation, route }) {
       />
       <TextInput 
         placeholder='Age'
-        value={contactData.age.toString()}
+        value={contactData.age}
         onChangeText={(value) => setContactData(prevState => ({...prevState, age: value}))}
         style={styles.inputStyle}
       />
